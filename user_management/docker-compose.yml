@@ -1,0 +1,35 @@
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+    depends_on:
+
+      - mongo
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3001:80"  # <-- map 3001 (host) to 80 (nginx container)
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:6
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ranyae
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
