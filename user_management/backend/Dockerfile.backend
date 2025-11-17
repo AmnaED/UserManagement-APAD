@@ -1,0 +1,19 @@
+# Use Python base image
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# Copy Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy Flask app
+COPY app.py ./
+# Copy React build if you want Flask to serve it
+COPY build ./build
+
+# Expose Flask port
+EXPOSE 5000
+
+# Run Flask
+CMD ["python", "app.py"]
