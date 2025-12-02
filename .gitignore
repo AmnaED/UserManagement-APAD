@@ -1,6 +1,12 @@
-node_modules/
 __pycache__/
+*.pyc
+.venv/
 .env
-build/
-dist/
-mongo-data/
+.DS_Store
+.vscode/
+.idea/
+.coverage
+htmlcov/
+.pytest_cache/
+node_modules/
+*.log
