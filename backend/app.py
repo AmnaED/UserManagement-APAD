@@ -34,6 +34,10 @@ db = client["user-management-db"]
 
 users_collection = db["user-management"]
 
+@app.route("/")
+def home():
+    return "User Management Service is running!"
+
 # API endpoint to get all users
 @app.route("/api/users", methods=["GET"])
 def get_users():
